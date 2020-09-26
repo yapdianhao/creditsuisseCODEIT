@@ -28,7 +28,6 @@ def cleanFloor(arr):
     curr = 0
     while stack:
         nextDirty = stack.pop()
-        print(nextDirty)
         if nextDirty > curr:
             while curr < nextDirty:
                 if arr[curr] > 0:
