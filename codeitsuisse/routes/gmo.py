@@ -20,27 +20,54 @@ def evaluateGMO():
 def crop(sequence):
     d = collections.Counter(sequence)
     newSeq = ''
-    newSeq += 'CC' * (d['C'] // 2)
-    d['C'] %= 2
-    acgt = min(d['A'], d['C'], d['G'], d['T'])
-    newSeq += 'ACGT' * acgt
-    d['A'] -= acgt
-    d['C'] -= acgt
-    d['G'] -= acgt
-    d['T'] -= acgt
-    noA = ''
-    for i in d:
-        if i != 'A':
-            noA += i * d[i]
-    remaining = ''
-    counter = min(len(noA), d['A'] // 2)
-    for i in range(counter):
-        remaining += 'AA'
-        remaining += noA[0]
-        noA = noA[1:]
-    newSeq += remaining
-    if noA:
-        newSeq += noA
+    if (d['C'] // 2) * 25 > min(d['A'], d['C'], d['G'], d['T']) * 15:
+        newSeq = ''
+        newSeq += 'CC' * (d['C'] // 2)
+        d['C'] %= 2
+        acgt = min(d['A'], d['C'], d['G'], d['T'])
+        newSeq += 'ACGT' * acgt
+        d['A'] -= acgt
+        d['C'] -= acgt
+        d['G'] -= acgt
+        d['T'] -= acgt
+        noA = ''
+        for i in d:
+            if i != 'A':
+                noA += i * d[i]
+        remaining = ''
+        counter = min(len(noA), d['A'] // 2)
+        for i in range(counter):
+            remaining += 'AA'
+            remaining += noA[0]
+            noA = noA[1:]
+        newSeq += remaining
+        if noA:
+            newSeq += noA
+        else:
+            newSeq += 'A' * (d['A'] - counter * 2)
     else:
-        newSeq += 'A' * (d['A'] - counter * 2)
+        acgt = min(d['A'], d['C'], d['G'], d['T'])
+        newSeq += 'ACGT' * acgt
+        d['A'] -= acgt
+        d['C'] -= acgt
+        d['G'] -= acgt
+        d['T'] -= acgt
+        newSeq += 'CC' * (d['C'] // 2)
+        d['C'] %= 2
+        noA = ''
+        for i in d:
+            if i != 'A':
+                noA += i * d[i]
+        remaining = ''
+        counter = min(len(noA), d['A'] // 2)
+        for i in range(counter):
+            remaining += 'AA'
+            remaining += noA[0]
+            noA = noA[1:]
+        newSeq += remaining
+        if noA:
+            newSeq += noA
+        else:
+            newSeq += 'A' * (d['A'] - counter * 2)
+    print(len(newSeq) == len(sequence))
     return newSeq
