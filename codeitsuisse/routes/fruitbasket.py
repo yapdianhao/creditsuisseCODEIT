@@ -1,6 +1,7 @@
 import logging
 import json
 import ast
+import collections
 
 from flask import request, jsonify;
 
@@ -13,8 +14,14 @@ def evaluateFruitBasket():
     data = ast.literal_eval((request.get_data()).decode('UTF-8'));
     logging.info("data sent for evaluation {}".format(data))
     fruits = dict()
+    weight = collections.defaultdict()
+    weight['maApple'] = 50
+    weight['maWatermelon'] = 50
+    weight['maBanana'] = 50
+    total = 0
     for i in data:
-        fruits[i] = data.get(i)
+        print(i, data[i])
+        total += weight[i] * data[i]
     logging.info(fruits)
     result = 7400
     logging.info(result)
