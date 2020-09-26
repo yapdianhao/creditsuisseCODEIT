@@ -14,7 +14,7 @@ def evaluateGMO():
     logging.info("data sent for evaluation {}".format(data))
     for i in range(len(data['list'])):
         data['list'][i]['geneSequence'] = crop(data['list'][i]['geneSequence'])
-        logging.info("score: " + str(data['list'][i]['geneSequence'].count('ACGT')  * 15 + data['list'][i]['geneSequence'].count('CC') * 25 - data['list'][i]['geneSequence'].count('AAA') * 10))
+        logging.info("score for " + str(i) + " : " + str(data['list'][i]['geneSequence'].count('ACGT')  * 15 + data['list'][i]['geneSequence'].count('CC') * 25 - data['list'][i]['geneSequence'].count('AAA') * 10))
     logging.info(data)
     return jsonify(data);
 
