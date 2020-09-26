@@ -14,13 +14,14 @@ def evaluateGMO():
     logging.info("data sent for evaluation {}".format(data))
     for i in range(len(data['list'])):
         data['list'][i]['geneSequence'] = crop(data['list'][i]['geneSequence'])
+        logging.info(data['list'][i]['geneSequence'].count('ACGT')  * 15 + data['list'][i]['geneSequence'].count('CC') * 25 - data['list'][i]['geneSequence'].count('AAA') * 10)
     logging.info("My result :{}".format(data))
     return jsonify(data);
 
 def crop(sequence):
     d = collections.Counter(sequence)
     newSeq = ''
-    if (d['C'] // 2) * 25 > min(d['A'], d['C'], d['G'], d['T']) * 15:
+    if (d['C'] // 4) * 25 > min(d['A'], d['C'], d['G'], d['T']) * 15:
         newSeq = ''
         newSeq += 'CC' * (d['C'] // 2)
         d['C'] %= 2
