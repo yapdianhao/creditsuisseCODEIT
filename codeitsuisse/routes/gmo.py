@@ -1,5 +1,6 @@
 import logging
 import json
+import collections
 
 from flask import request, jsonify;
 
@@ -11,7 +12,35 @@ logger = logging.getLogger(__name__)
 def evaluateGMO():
     data = request.get_json();
     logging.info("data sent for evaluation {}".format(data))
-    #inputValue = data.get("input");
-    result = 0
-    #logging.info("My result :{}".format(result))
-    return json.dumps(result);
+    for i in range(len(data['list']):
+        data['list'][i]['geneSequence'] = crop(data['list'][i]['geneSequence'])
+    logging.info("My result :{}".format(data))
+    return json.dumps(data);
+
+def crop(sequence):
+    d = collections.Counter(sequence)
+    newSeq = ''
+    newSeq += 'CC' * (d['C'] // 2)
+    d['C'] %= 2
+    acgt = min(d['A'], d['C'], d['G'], d['T'])
+    newSeq += 'ACGT' * acgt
+    d['A'] -= acgt
+    d['C'] -= acgt
+    d['G'] -= acgt
+    d['T'] -= acgt
+    noA = ''
+    for i in d:
+        if i != 'A':
+            noA += i * d[i]
+    remaining = ''
+    counter = min(len(noA), d['A'] // 2)
+    for i in range(counter):
+        remaining += 'AA'
+        remaining += noA[0]
+        noA = noA[1:]
+    newSeq += remaining
+    if noA:
+        newSeq += noA
+    else:
+        newSeq += 'A' * (d['A'] - counter * 2)
+    return newSeq
