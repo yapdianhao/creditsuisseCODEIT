@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 @app.route('/olympiad-of-babylon', methods=['POST'])
 def evaluateOlympiad():
     data = request.get_json();
+    print(data)
     logging.info("data sent for evaluation {}".format(data))
     books = data.get("books");
     days = data.get("days")
