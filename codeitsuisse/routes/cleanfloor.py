@@ -35,7 +35,7 @@ def cleanFloor(arr):
                     arr[curr] -= 1
                 elif arr[curr]:
                     arr[curr] = 1
-                if arr[curr] > 0 and count != 0:
+                if arr[curr] > 0 and counts != 0:
                     stack.append(curr)
                 counts += 1
                 curr += 1
@@ -46,7 +46,7 @@ def cleanFloor(arr):
                 else:
                     arr[curr] 
                     stack.append(curr)
-                if arr[curr] > 0 and count != 0:
+                if arr[curr] > 0 and counts != 0:
                     stack.append(curr)
                 counts += 1
                 curr -= 1
