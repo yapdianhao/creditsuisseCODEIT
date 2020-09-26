@@ -19,6 +19,7 @@ def evaluateFruitBasket():
     weight['maWatermelon'] = 50
     weight['maBanana'] = 50
     weight['maPineapple'] = 50
+    weight['maAvocado'] = 60
     total = 0
     for i in data:
         print(i, data[i])
