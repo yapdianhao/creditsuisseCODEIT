@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 @app.route('/fruitbasket', methods=['POST'])
 def evaluateFruitBasket():
-    data = request.get_json();
+    data = ast.literal_eval((request.get_data()).decode('UTF-8'));
     logging.info("data sent for evaluation {}".format(data))
     fruits = dict()
     for i in data:
@@ -17,7 +17,7 @@ def evaluateFruitBasket():
     logging.info(fruits)
     result = 10000
     logging.info(result)
-    return json.dumps(result);
+    return "{}".format(result);
 
 
 
