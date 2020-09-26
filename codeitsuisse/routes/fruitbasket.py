@@ -14,10 +14,11 @@ def evaluateFruitBasket():
     data = ast.literal_eval((request.get_data()).decode('UTF-8'));
     logging.info("data sent for evaluation {}".format(data))
     fruits = dict()
-    weight = collections.defaultdict()
+    weight = collections.defaultdict(int)
     weight['maApple'] = 50
     weight['maWatermelon'] = 50
     weight['maBanana'] = 50
+    weight['maPineapple'] = 50
     total = 0
     for i in data:
         print(i, data[i])
