@@ -16,7 +16,8 @@ def evaluateSaladSpree():
     streets = data.get("salad_prices_street_map")
     result = buySalad(salads, streets)
     logging.info("result: {}".format(result))
-    return json.dumps(result);
+    d = {"result": result}
+    return json.dumps(d)
 
 
 def buySalad(target, streets):
