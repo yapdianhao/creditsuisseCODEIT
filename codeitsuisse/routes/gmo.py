@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 def evaluateGMO():
     data = request.get_json();
     logging.info("data sent for evaluation {}".format(data))
-    for i in range(len(data['list']):
+    for i in range(len(data['list'])):
         data['list'][i]['geneSequence'] = crop(data['list'][i]['geneSequence'])
     logging.info("My result :{}".format(data))
     return json.dumps(data);
