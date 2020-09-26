@@ -24,13 +24,16 @@ def evaluateOlympiad():
 def olympiad(books, days):
     books.sort()
     totalTime = sum(days)
-    dp = [[0 for _ in range(totalTime + 1)] for _ in range(len(books))]
+    dp = [[[0, 0] for _ in range(totalTime + 1)] for _ in range(len(books))]
     for j in range(totalTime + 1):
         if j >= books[0]:
-            dp[0][j] = 1
+            dp[0][j] = [1, books[0]]
     for i in range(1, len(books)):
         for j in range(totalTime + 1):
-            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
-            if j == books[i - 1] + books[i]:
-                dp[i][j] += 1
-    return dp[-1][-1]
+            chosen = max(dp[i - 1][j], dp[i][j - 1], key = lambda x: x[0])
+            dp[i][j] = chosen[:]
+            if chosen[1] + books[i] <= j and chosen[0] <= i:
+                dp[i][j][0] += 1
+                dp[i][j][1] += books[i]
+    #print(dp)
+    return dp[-1][-1][0]
