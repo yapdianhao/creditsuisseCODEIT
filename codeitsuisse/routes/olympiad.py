@@ -22,33 +22,20 @@ def evaluateOlympiad():
 
 def olympiad(books, days):
     books.sort()
-    days.sort(reverse = True)
-    added = set()
-    for day in days:
-        twoPointer(books, day, added)
-    return len(added)
-
-def twoPointer(books, day, added):
-    left = 0
-    right = len(books) - 1
-    while left <= right:
-        if left == right:
-            if books[left] not in added:
-                added.add(books[left])
-            return
-        elif books[left] + books[right] <= day:
-            if books[left] not in added and books[right] not in added:
-                added.add(books[left])
-                added.add(books[right])
-                break
-            elif books[left] in added:
-                left += 1
-            elif books[right] in added:
-                right -= 1
-        elif books[left] + books[right] > day:
-            if books[right] in added:
-                right -= 1
-            elif books[left] in added:
-                left += 1
-            else:
-                right -= 1
+    days.sort()
+    cumSum = 0
+    total = 0
+    cumulative = 1
+    for i in range(len(books) - 1):
+        if not days:
+            break
+        nextIdx = bisect.bisect_left(days, cumSum)
+        if days[nextIdx] - cumSum >= books[i + 1]:
+            cumSum += books[i + 1]
+            cumulative += 1
+        else:
+            total += cumulative
+            cumSum = books[i + 1]
+            days.remove(days[nextIdx])
+            cumulative = 1
+    return total
