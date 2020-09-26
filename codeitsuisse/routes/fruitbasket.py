@@ -15,7 +15,7 @@ def evaluateFruitBasket():
     logging.info("data sent for evaluation {}".format(data))
     fruits = dict()
     weight = collections.defaultdict(int)
-    weight['maApple'] = 10
+    weight['maApple'] = 40
     weight['maWatermelon'] = 40
     weight['maBanana'] = 50
     weight['maPineapple'] = 50
