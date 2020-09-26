@@ -39,18 +39,19 @@ def getIntersections(shapeCoordinates, lineCoordinates):
                                 ([shape_x1, shape_y1], [shape_x2, shape_y2]))
         if ((shape_x1 - x) * (shape_x2 - x)) <= 0 and ((shape_y1 - y) * (shape_y2 - y)) <= 0:
             ans.append({'x': x, 'y': y})
-    for i in range(len(shapeCoordinates)):
-        j = (i + 1) % len(shapeCoordinates)
-        shape_x1 = shapeCoordinates[i]['x']
-        shape_y1 = shapeCoordinates[i]['y']
-        shape_x2 = shapeCoordinates[j]['x']
-        shape_y2 = shapeCoordinates[j]['y']
-        if isParallel(shape_x1, shape_y1, shape_x2, shape_y2, line_x1, line_y1, line_x2, line_y2):
-            return
-        x, y = line_intersection(([line_x1, line_y1], [line_x2, line_y2]),
-                                ([shape_x1, shape_y1], [shape_x2, shape_y2]))
-        if ((shape_x1 - x) * (shape_x2 - x)) <= 0 and ((shape_y1 - y) * (shape_y2 - y)) <= 0:
-            ans.append({'x': x, 'y': y})
+    else:
+        for i in range(len(shapeCoordinates)):
+            j = (i + 1) % len(shapeCoordinates)
+            shape_x1 = shapeCoordinates[i]['x']
+            shape_y1 = shapeCoordinates[i]['y']
+            shape_x2 = shapeCoordinates[j]['x']
+            shape_y2 = shapeCoordinates[j]['y']
+            if isParallel(shape_x1, shape_y1, shape_x2, shape_y2, line_x1, line_y1, line_x2, line_y2):
+                return
+            x, y = line_intersection(([line_x1, line_y1], [line_x2, line_y2]),
+                                    ([shape_x1, shape_y1], [shape_x2, shape_y2]))
+            if ((shape_x1 - x) * (shape_x2 - x)) <= 0 and ((shape_y1 - y) * (shape_y2 - y)) <= 0:
+                ans.append({'x': x, 'y': y})
     return ans
 
 def isParallel(x1, y1, x2, y2, x3, y3, x4, y4):
