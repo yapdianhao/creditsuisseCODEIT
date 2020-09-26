@@ -23,20 +23,14 @@ def evaluateOlympiad():
 
 def olympiad(books, days):
     books.sort()
-    days.sort()
-    cumSum = 0
-    total = 0
-    cumulative = 1
-    for i in range(len(books) - 1):
-        if not days:
-            break
-        nextIdx = bisect.bisect_left(days, cumSum)
-        if days[nextIdx] - cumSum >= books[i + 1]:
-            cumSum += books[i + 1]
-            cumulative += 1
-        else:
-            total += cumulative
-            cumSum = books[i + 1]
-            days.remove(days[nextIdx])
-            cumulative = 1
-    return total
+    totalTime = sum(days)
+    dp = [[0 for _ in range(totalTime + 1)] for _ in range(len(books))]
+    for j in range(totalTime + 1):
+        if j >= books[0]:
+            dp[0][j] = 1
+    for i in range(1, len(books)):
+        for j in range(totalTime + 1):
+            dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+            if j == books[i - 1] + books[i]:
+                dp[i][j] += 1
+    return dp[-1][-1]
