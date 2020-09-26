@@ -7,4 +7,5 @@ import codeitsuisse.routes.fruitbasket
 import codeitsuisse.routes.cleanfloor
 import codeitsuisse.routes.gmo
 import codeitsuisse.routes.cluster
+import codeitsuisse.routes.olympiad
 
