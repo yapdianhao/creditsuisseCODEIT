@@ -11,9 +11,9 @@ logger = logging.getLogger(__name__)
 def evaluateCluster():
     data = request.get_json();
     logging.info("data sent for evaluation {}".format(data))
-    result = 0
-    logging.info("My result :{}".format(result))
-    return json.dumps(result);
+    answer = {"answer": cluster(data)}
+    logging.info("My result :{}".format(answer))
+    return json.dumps(answer);
 
 
 def cluster(graph):
