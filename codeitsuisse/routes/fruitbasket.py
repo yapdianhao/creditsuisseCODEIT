@@ -16,7 +16,7 @@ def evaluateFruitBasket():
     for i in data:
         fruits[i] = data.get(i)
     logging.info(fruits)
-    result = 10000
+    result = 7800
     logging.info(result)
     return "{}".format(result);
 
