@@ -15,7 +15,7 @@ def evaluateGMO():
     for i in range(len(data['list'])):
         data['list'][i]['geneSequence'] = crop(data['list'][i]['geneSequence'])
     logging.info("My result :{}".format(data))
-    return json.dumps(data);
+    return jsonify(data);
 
 def crop(sequence):
     d = collections.Counter(sequence)
