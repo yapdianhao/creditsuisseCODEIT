@@ -3,5 +3,6 @@ app = Flask(__name__)
 import codeitsuisse.routes.square
 import codeitsuisse.routes.sort
 import codeitsuisse.routes.saladspree
+import codeitsuisse.routes.fruitbasket
 
 
