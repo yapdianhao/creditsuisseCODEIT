@@ -21,7 +21,7 @@ def evaluateGMO():
 def crop(sequence):
     d = collections.Counter(sequence)
     newSeq = ''
-    if (d['C'] // 4) * 25 > min(d['A'], d['C'], d['G'], d['T']) * 15:
+    if (d['C'] // 2) * 25 > min(d['A'], d['C'], d['G'], d['T']) * 15:
         newSeq = ''
         newSeq += 'CC' * (d['C'] // 2)
         d['C'] %= 2
