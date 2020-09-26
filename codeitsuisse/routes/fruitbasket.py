@@ -20,8 +20,6 @@ def evaluateFruitBasket():
         print(i, data[i])
         total += weight[i] * data[i]
     logging.info(fruits)
-    result = 7400
-    logging.info(result)
     return "{}".format(total);
 
 
