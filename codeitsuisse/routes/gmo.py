@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 @app.route('/intelligent-farming', methods=['POST'])
 def evaluateGMO():
     data = request.get_json();
-    logging.info("data sent for evaluation {}".format(data))
+    #logging.info("data sent for evaluation {}".format(data))
     for i in range(len(data['list'])):
         data['list'][i]['geneSequence'] = crop(data['list'][i]['geneSequence'])
         #logging.info("score for " + str(i) + " : " + str(data['list'][i]['geneSequence'].count('ACGT')  * 15 + data['list'][i]['geneSequence'].count('CC') * 25 - data['list'][i]['geneSequence'].count('AAA') * 10))
