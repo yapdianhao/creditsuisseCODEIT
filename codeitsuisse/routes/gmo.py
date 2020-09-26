@@ -42,10 +42,8 @@ def crop(sequence):
             remaining += noA[0]
             noA = noA[1:]
         newSeq += remaining
-        if noA:
-            newSeq += noA
-        else:
-            newSeq += 'A' * (d['A'] - counter * 2)
+        newSeq += noA
+        newSeq += 'A' * (d['A'] - counter * 2)
     else:
         acgt = min(d['A'], d['C'], d['G'], d['T'])
         newSeq += 'ACGT' * acgt
@@ -66,10 +64,8 @@ def crop(sequence):
             remaining += noA[0]
             noA = noA[1:]
         newSeq += remaining
-        if noA:
-            newSeq += noA
-        else:
-            newSeq += 'A' * (d['A'] - counter * 2)
+        newSeq += noA
+        newSeq += 'A' * (d['A'] - counter * 2)
     if len(sequence) != len(newSeq):
         logging.info(sequence)
     return newSeq
