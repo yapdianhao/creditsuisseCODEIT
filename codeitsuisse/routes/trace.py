@@ -71,7 +71,7 @@ def compareWithinCluster(idMap, gnomeMap, neighbours, clusters, infected, origin
                 continue
             currScore = getScore(clusters[i], clusters[j])
             if score[0] == currScore[0]:
-                neighbours[map[y["name"]]].append((map[x["name"]], currScore[1]))
+                neighbours[idMap[y["name"]]].append((idMap[x["name"]], currScore[1]))
                 neighbours[idMap[clusters[i]['name']]].append((idMap[clusters[j]['name']], currScore[1]))
         scoreClusterOrigin = getScore(clusters[i], origin)
         if score[0] >= scoreClusterOrigin[0]:
