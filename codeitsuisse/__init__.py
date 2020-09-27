@@ -10,3 +10,4 @@ import codeitsuisse.routes.cluster
 import codeitsuisse.routes.olympiad
 import codeitsuisse.routes.social
 import codeitsuisse.routes.geom
+import codeitsuisse.routes.maze
