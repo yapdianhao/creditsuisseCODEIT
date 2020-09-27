@@ -64,7 +64,7 @@ def compareWithinCluster(idMap, gnomeMap, neighbours, clusters, infected, origin
             if i == j:
                 continue
             currScore = getScore(clusters[i], clusters[j])
-            if score[0] >= currScore:
+            if score[0] >= currScore[0]:
                 score = currScore
         for j in range(len(clusters)):
             if i == j:
