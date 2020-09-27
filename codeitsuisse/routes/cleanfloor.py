@@ -59,6 +59,8 @@ def cleanFloor(arr):
                 tempq.append(start + 1)
             while tempq:
                 curr = tempq.popleft()
+                if (curr) >= len(arr):
+                    continue
                 if arr[curr] == 0:
                     q.append(curr)
                 elif arr[curr] > 0:
