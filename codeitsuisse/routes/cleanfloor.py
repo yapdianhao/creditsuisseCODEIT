@@ -1,5 +1,6 @@
 import logging
 import json
+import collections
 
 from flask import request, jsonify;
 
@@ -20,36 +21,53 @@ def evaluateCleanFloor():
 
 
 def cleanFloor(arr):
-    counts = 0
-    stack = []
-    for i in range(len(arr)):
+    q = collections.deque()
+    total = 0
+    start = 0
+    if arr[0] > 0:
+        q.append(1)
+        q.append(0)
+    while q:
+        curr = q.popleft()
+        #print(curr)
+        if arr[curr] == 0:
+            arr[curr] += 1
+            q.append(curr)
+        elif arr[curr] > 0:
+            arr[curr] -= 1
+            if arr[curr] > 0:
+                q.append(curr)
+        total += 1
+        start = curr
+    for i in range(start, len(arr)):
         if arr[i] > 0:
-            stack.append(i)
-    curr = 0
-    while stack:
-        nextDirty = stack.pop()
-        if nextDirty > curr:
-            while curr < nextDirty:
-                if arr[curr] > 0:
+            q.append(i)
+    while q:
+        nextIdx = q.popleft()
+        if arr[nextIdx] == 0:
+            continue
+        while start < nextIdx:
+            tempq = collections.deque()
+            start += 1
+            total += 1
+            if arr[start] == 0:
+                arr[start] += 1
+            elif arr[start] > 0:
+                arr[start] -= 1
+            if arr[start] > 0:
+                tempq.append(start)
+                tempq.append(start + 1)
+            while tempq:
+                curr = tempq.popleft()
+                if arr[curr] == 0:
+                    q.append(curr)
+                elif arr[curr] > 0:
                     arr[curr] -= 1
-                elif arr[curr]:
-                    arr[curr] = 1
-                if arr[curr] > 0 and counts != 0:
-                    stack.append(curr)
-                counts += 1
-                curr += 1
-        else:
-            while curr > nextDirty:
-                if arr[curr] > 0:
-                    arr[curr] -= 1
-                else:
-                    arr[curr] 
-                    stack.append(curr)
-                if arr[curr] > 0 and counts != 0:
-                    stack.append(curr)
-                counts += 1
-                curr -= 1
-    return counts
+                    if arr[curr] > 0:
+                        tempq.append(curr)
+                total += 1
+                start = curr
+    return total
 
 
 
